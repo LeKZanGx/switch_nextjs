@@ -10,14 +10,30 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Swal from 'sweetalert2';
 
 export default function Register() {
     const router = useRouter()
     const handleRegister = async (event) => {
         event.preventDefault();
+
+        const password = event.target.password1.value;
+        const confirmpassword = event.target.password2.value;
+
+        if (password != confirmpassword) {
+            Swal.fire({
+                icon: "info",
+                title: "แย่จัง!",
+                text: "รหัสผ่านไม่ตรงกัน กรุณากรอกรหัสผ่านใหม่อีกครั้ง",
+                timer: 2000,
+            })
+            return
+        }
+
         const data = {
             username: event.target.username.value,
-            password: event.target.password.value,
+            email: event.target.email.value,
+            password: event.target.password1.value,
         }
 
         const JSONdata = JSON.stringify(data)
@@ -34,6 +50,63 @@ export default function Register() {
 
         const response = await fetch(endpoint, options)
         const result = await response.json()
+
+        console.log(result)
+
+        if (result.status != "success") {
+            const showLoading = await Swal.fire({
+                icon: "info",
+                title: "รอสักครู่...",
+                timer: 1000,
+                didOpen: function () {
+                    Swal.showLoading();
+                }
+            })
+            if (showLoading) {
+                Swal.fire({
+                    icon: "error",
+                    title: "แย่จัง!",
+                    text: result.data.data,
+                    timer: 2000,
+                    showConfirmButton: false,
+                    showClass: {
+                        popup: "animate__animated animate__slideInDown animate__faster"
+                    },
+                    hideClass: {
+                        popup: "animate__animated animate__lightSpeedOutLeft animate__faster"
+                    },
+                })
+                return
+            }
+        } else {
+            const showLoading = await Swal.fire({
+                icon: "info",
+                title: "รอสักครู่...",
+                timer: 1000,
+                didOpen: function () {
+                    Swal.showLoading();
+                }
+            })
+
+            if (showLoading) {
+                Swal.fire({
+                    icon: "success",
+                    title: "เยี่ยมเลย!",
+                    text: result.message,
+                    timer: 2000,
+                    showConfirmButton: false,
+                    showClass: {
+                        popup: "animate__animated animate__slideInDown animate__faster"
+                    },
+                    hideClass: {
+                        popup: "animate__animated animate__lightSpeedOutLeft animate__faster"
+                    },
+                    didClose: function() {
+                        router.push("/login", undefined)
+                    }
+                })
+            }
+        }
     }
     return (
         <Container>
