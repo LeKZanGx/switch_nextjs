@@ -22,7 +22,7 @@ export default function Register() {
 
         const JSONdata = JSON.stringify(data)
 
-        const endpoint = 'http://localhost:8080/apiV1/user/login'
+        const endpoint = 'https://golang-authapi.onrender.com/apiV1/user/register'
 
         const options = {
             method: 'POST',
