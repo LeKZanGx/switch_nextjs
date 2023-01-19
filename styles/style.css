@@ -165,3 +165,7 @@ a:active {
     background-position: 200% center;
   }
 }
+
+.home-text {
+  font-family: Silkscreen;
+}

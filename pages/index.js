@@ -7,11 +7,16 @@ export default function Home() {
           <div className="col-lg mb-4 justify-content-center text-center">
             <Image
               src="https://cdn.discordapp.com/icons/961866856283635732/1aa2c24f001a61d7def13c9aa460b18c.webp?size=512"
+              width=""
+              height=""
               alt="banner-switchhub"
             />
           </div>
           <div className="col-lg mb-4">
             <h2 className="text-center linear-wipe">SwitchHub</h2>
+            <hr></hr>
+            <h4 className="text-center home-text">#1 Quality Script</h4>
+            <h4 className="text-center home-text">ค่ายก่ำๆ สคริปกังๆ ยกให้ SwitchHub</h4>
           </div>
         </div>
       </div>
