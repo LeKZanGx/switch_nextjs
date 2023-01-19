@@ -11,7 +11,7 @@ export default function Home() {
             />
           </div>
           <div className="col-lg mb-4">
-            <h3 className="linear-wipe">SwitchHub | No. 1</h3>
+            <h2 className="linear-wipe">SwitchHub</h2>
           </div>
         </div>
       </div>
