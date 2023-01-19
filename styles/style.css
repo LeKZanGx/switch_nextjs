@@ -146,6 +146,7 @@ a:active {
 
 .linear-wipe {
   font-family: Silkscreen;
+  font-size: large;
   background: linear-gradient(to right,
       rgb(187, 62, 255) 20%,
       rgb(255, 73, 91) 40%,
