@@ -83,7 +83,6 @@ export const NavbarComponent = () => {
       <>
         <Script src="https://code.jquery.com/jquery-3.6.3.min.js" />
         <Script src="//cdn.jsdelivr.net/npm/sweetalert2@11" />
-        <Script src="../assets/auth.js" />
         {[false].map((expand) => (
           <Navbar key={expand} bg="dark" expand={expand} className="mb-3">
             <Container fluid>
