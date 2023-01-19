@@ -48,6 +48,18 @@ a:active {
   text-decoration: none;
 }
 
+.banner-home {
+  background: #181818;
+  background-position: 0% 25%;
+  background-size: cover !important;
+  padding: 35px;
+  height: auto;
+}
+
+.m-cent {
+  margin: 0% auto !important;
+}
+
 .button-62 {
   background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
   border: 0;
@@ -129,4 +141,28 @@ a:active {
 
 .button-87:active {
   transform: scale(0.95);
+}
+
+.linear-wipe {
+  background: linear-gradient(
+    to right,
+    rgb(187, 62, 255) 20%,
+    rgb(255, 73, 91) 40%,
+    rgb(255, 255, 0) 60%,
+    rgb(56, 156, 255) 80%
+  );
+  background-size: 200% auto;
+
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: shine 1s linear infinite;
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
 }
