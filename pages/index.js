@@ -11,7 +11,7 @@ export default function Home() {
             />
           </div>
           <div className="col-lg mb-4">
-            <h2 className="linear-wipe">SwitchHub</h2>
+            <h2 className="text-center linear-wipe">SwitchHub</h2>
           </div>
         </div>
       </div>
