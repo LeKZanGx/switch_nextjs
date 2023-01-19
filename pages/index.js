@@ -8,8 +8,8 @@ export default function Home() {
             <div className="d-flex justify-content-end mr-2">
               <Image
                 src="https://cdn.discordapp.com/icons/961866856283635732/1aa2c24f001a61d7def13c9aa460b18c.webp?size=512"
-                width="350"
-                height="350"
+                width="300"
+                height="300"
                 alt="banner-switchhub"
               />
             </div>
