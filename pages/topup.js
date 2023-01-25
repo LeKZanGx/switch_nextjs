@@ -92,7 +92,7 @@ function Topup() {
                 <div className='my-5 mx-auto'>
                     <Row className='justify-content-md-center'>
                         <Col md="12">
-                            <Card data-aos="zoom-in" data-aos-duration="500">
+                            <Card bg='dark' key='dark' text='light' border='success' data-aos="zoom-in" data-aos-duration="500" >
                                 <Card.Body>
                                     <Card.Title className='ml-3'>
                                         <h3 data-aos="fade-left" data-aos-duration="2000"><FontAwesomeIcon icon={faGift} /> TOPUP | อังเปา</h3>

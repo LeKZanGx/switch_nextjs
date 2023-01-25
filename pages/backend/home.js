@@ -1,8 +1,7 @@
-import { text } from "@fortawesome/fontawesome-svg-core";
 import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
-import { Container } from "react-bootstrap"
+import { Button, Container } from "react-bootstrap"
 import Swal from "sweetalert2";
 
 function BackendHome(props) {
@@ -135,7 +134,8 @@ function BackendHome(props) {
                         <div class="form-floating">
                             <textarea class="form-control" id="key"></textarea>
                             <label for="key">คีย์ที่ต้องการเพิ่ม</label>
-                        </div>`,
+                        </div>
+                        <br>`,
                 confirmButtonText: 'แก้ไข',
                 showDenyButton: true,
                 denyButtonText: `ลบคีย์ทั้งหมด`,
@@ -152,23 +152,23 @@ function BackendHome(props) {
                     if (!newname || !price || !description || !category || !image) {
                         Swal.showValidationMessage(`Please enter data`)
                     }
-                    return { name: name, newname: newname, price: price, description: description, category: category, image: image, keys: keyArray}
+                    return { name: name, newname: newname, price: price, description: description, category: category, image: image, keys: keyArray }
                 },
-                preDeny:() => {
+                preDeny: () => {
                     const name = result.data.data.name
-                    return { name: name}
+                    return { name: name }
                 }
-            }).then((result) => {
-                if (result.isDismissed) {
+            }).then((resultc) => {
+                if (resultc.isDismissed) {
                     return null
                 }
 
-                if (result.isDenied) {
-                    ConfirmDeleteKey(result.value)
+                if (resultc.isDenied) {
+                    ConfirmDeleteKey(resultc.value)
                 }
 
-                if (result.isConfirmed) {
-                    ConfirmUpdateItem(result.value)
+                if (resultc.isConfirmed) {
+                    ConfirmUpdateItem(resultc.value)
                 }
             })
         }
@@ -225,8 +225,58 @@ function BackendHome(props) {
         }
     }
 
+    const ConfirmDelete = async function () {
+        Swal.fire({
+            title: `ลบข้อมูล`,
+            html: `<input type="text" id="name" class="swal2-input" placeholder="ชื่อสินค้า">`,
+            confirmButtonText: 'ลบข้อมูล',
+            focusConfirm: false,
+            preConfirm: () => {
+                const name = Swal.getPopup().querySelector('#name').value
+                if (!name) {
+                    Swal.showValidationMessage(`Please enter data`)
+                }
+                return { name: name }
+            }
+        }).then((result) => {
+            let name = result.value?.name
+            if (result.isDismissed) {
+                return null
+            }
+
+            if (result.isDenied) {
+                return null
+            }
+
+            if (result.isConfirmed) {
+                axios.post('https://golang-authapi.onrender.com/apiV1/item/delete', {
+                    name: name
+                }).then((res) => {
+                    if (res.data.status != "success") {
+                        Swal.fire({
+                            icon: "error",
+                            title: "หว้าแย่จัง",
+                            text: "เกิดข้อผิดพลาด",
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        return
+                    }else{
+                        Swal.fire({
+                            icon: "success",
+                            title: "สำเร็จ",
+                            text: res.data.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        return
+                    }
+                })
+            }
+        })
+    }
+
     const ConfirmDeleteKey = async function (data) {
-        console.log(data)
         const JSONdata = JSON.stringify(data)
 
         const endpoint = 'https://golang-authapi.onrender.com/apiV1/item/deletekey'
@@ -241,7 +291,6 @@ function BackendHome(props) {
 
         const response = await fetch(endpoint, options)
         const result = await response.json()
-        console.log(result)
         if (result.status != "success") {
             Swal.fire({
                 icon: "error",
@@ -338,6 +387,9 @@ function BackendHome(props) {
                     ภาพรวมข้อมูล <span className="text-main-log">ผู้ใช้งาน</span>
                 </h1>
                 <h1 className="ml-5 text-base text-white/60">ผู้ใช้งานในเว็ปทั้งหมด {countUser} บัญชี</h1>
+                <Button variant="outline-success" className="ml-5 text-white bg-gradient-to-t from-main-600 to-pink-400 px-2 rounded-2xl" onClick={() => setMenu('overview')}>ภาพรวมข้อมูล</Button>
+                <Button variant="outline-success" className="ml-5 text-white bg-gradient-to-t from-main-600 to-pink-400 px-2 rounded-2xl" onClick={() => setMenu('users')}>จัดการผู้ใช้งาน</Button>
+                <Button variant="outline-success" className="ml-5 text-white bg-gradient-to-t from-main-600 to-pink-400 px-2 rounded-2xl" onClick={() => setMenu('stocks')}>จัดการสินค้า</Button>
                 <div className="border-t border-white w-full my-3 opacity-40">
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 gap-x-4 text-green-500 justify-center text-center pt-7 px-4">
@@ -386,6 +438,78 @@ function BackendHome(props) {
                         <h1 className="text-base">Custom SHOP ITEM</h1>
                         <h1 className="text-sm">เพิ่มสินค้าเข้าสู่ระบบ</h1>
 
+                    </div>
+                </div>
+                <div className="border-t border-white w-full my-3 opacity-40">
+                </div>
+            </Container>
+        )
+    } else if (menu == "users") {
+        return (
+            <Container>
+                <h1 className="ml-5 text-white text-4xl sm:text-4xl font-extrabold">
+                    ภาพรวมข้อมูล <span className="text-main-log">ผู้ใช้งาน</span>
+                </h1>
+                <h1 className="ml-5 text-base text-white/60">ผู้ใช้งานในเว็ปทั้งหมด {countUser} บัญชี</h1>
+                <Button variant="outline-success" className="ml-5 text-white bg-gradient-to-t from-main-600 to-pink-400 px-2 rounded-2xl" onClick={() => setMenu('overview')}>ภาพรวมข้อมูล</Button>
+                <Button variant="outline-success" className="ml-5 text-white bg-gradient-to-t from-main-600 to-pink-400 px-2 rounded-2xl" onClick={() => setMenu('users')}>จัดการผู้ใช้งาน</Button>
+                <Button variant="outline-success" className="ml-5 text-white bg-gradient-to-t from-main-600 to-pink-400 px-2 rounded-2xl" onClick={() => setMenu('stocks')}>จัดการสินค้า</Button>
+                <div className="border-t border-white w-full my-3 opacity-40">
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 gap-x-4 text-green-500 justify-center text-center pt-7 px-4">
+                    {props.store.datauser.data.data.map((userdata, index) => (
+                        <div key={index} className="rounded-2xl shadow-xl border-8 bg-white border-green-500 p-6 transition ease-in-out delay-50 hover:-translate-y-7 hover:scale-11 duration-300 cursor-pointer" onClick={() => showUserData(userdata.username)}>
+                            <h1 className="text-xl">{userdata.username}</h1>
+                            <div className="d-flex justify-content-center">
+                                <div className="d-flex justify-content-center">
+                                    <Image src="/imgs/users.gif" width="50" height="50" alt="key" />
+                                </div>
+                            </div>
+                            <h1 className="text-base">Point: {userdata.point}</h1>
+                            <h1 className="text-sm">Status: {userdata.Stats}</h1>
+                        </div>
+                    ))}
+                </div>
+                <div className="border-t border-white w-full my-3 opacity-40">
+                </div>
+            </Container>
+        )
+    } else if (menu == "stocks") {
+        return (
+            <Container>
+                <h1 className="ml-5 text-white text-4xl sm:text-4xl font-extrabold">
+                    ภาพรวมข้อมูล <span className="text-main-log">สินค้า</span>
+                </h1>
+                <h1 className="ml-5 text-base text-white/60">สินค้าในเว็ปทั้งหมด {countItem} ชิ้น</h1>
+                <Button variant="outline-success" className="ml-5 text-white bg-gradient-to-t from-main-600 to-pink-400 px-2 rounded-2xl" onClick={() => setMenu('overview')}>ภาพรวมข้อมูล</Button>
+                <Button variant="outline-success" className="ml-5 text-white bg-gradient-to-t from-main-600 to-pink-400 px-2 rounded-2xl" onClick={() => setMenu('users')}>จัดการผู้ใช้งาน</Button>
+                <Button variant="outline-success" className="ml-5 text-white bg-gradient-to-t from-main-600 to-pink-400 px-2 rounded-2xl" onClick={() => setMenu('stocks')}>จัดการสินค้า</Button>
+                <Button variant="outline-danger" className="ml-5 text-white bg-gradient-to-t from-main-600 to-pink-400 px-2 rounded-2xl" onClick={() => ConfirmDelete()}>ลบสินค้าที่ต้องการ</Button>
+                <div className="border-t border-white w-full my-3 opacity-40">
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 gap-x-4 text-green-500 justify-center text-center pt-7 px-4">
+                    {props.store.dataitem.data.data.map((itemdata, index) => (
+                        <div key={index} className="rounded-2xl shadow-xl border-8 bg-white border-green-500 p-6 transition ease-in-out delay-50 hover:-translate-y-7 hover:scale-11 duration-300 cursor-pointer" onClick={() => showItemData(itemdata.name)}>
+                            <h1 className="text-xl">{itemdata.name}</h1>
+                            <div className="d-flex justify-content-center">
+                                <div className="d-flex justify-content-center">
+                                    <Image src="/imgs/shopping-cart.gif" width="50" height="50" alt="key" />
+                                </div>
+                            </div>
+                            <h1 className="text-base">Price: {itemdata.price}</h1>
+                            <h1 className="text-sm">Amount: {itemdata.Key.length}</h1>
+
+                        </div>
+                    ))}
+                    <div key={999} className="rounded-2xl shadow-xl border-8 bg-white border-green-500 p-6 transition ease-in-out delay-50 hover:-translate-y-7 hover:scale-11 duration-300 cursor-pointer" onClick={() => addItem()}>
+                        <h1 className="text-xl">เพิ่มสินค้า</h1>
+                        <div className="d-flex justify-content-center">
+                            <div className="d-flex justify-content-center">
+                                <Image src="/imgs/add-folder.gif" width="50" height="50" alt="key" />
+                            </div>
+                        </div>
+                        <h1 className="text-base">Custom SHOP ITEM</h1>
+                        <h1 className="text-sm">เพิ่มสินค้าเข้าสู่ระบบ</h1>
                     </div>
                 </div>
                 <div className="border-t border-white w-full my-3 opacity-40">

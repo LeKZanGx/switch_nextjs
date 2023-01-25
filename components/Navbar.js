@@ -163,9 +163,9 @@ export const NavbarComponent = () => {
             <Container fluid>
               <Navbar.Brand href="/home">
                 <Image
-                  src="https://cdn.discordapp.com/icons/961866856283635732/1aa2c24f001a61d7def13c9aa460b18c.webp?size=512"
-                  width="80"
-                  height="80"
+                  src="https://cdn.discordapp.com/attachments/1057020152106987590/1059787581849616474/Logo-switch-hub-gggggggggggggggggggggg.png"
+                  width="60"
+                  height="60"
                   className="d-inline-block align-top"
                   alt="test"
                 />
@@ -180,10 +180,7 @@ export const NavbarComponent = () => {
                 placement="start"
                 className="bg-dark text-white"
               >
-                <Offcanvas.Header closeButton>
-                  <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                    Menu
-                  </Offcanvas.Title>
+                <Offcanvas.Header>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                   <Nav className="justify-content-end flex-grow-1 pe-3">
@@ -212,7 +209,6 @@ export const NavbarComponent = () => {
                           <i className="mdi mdi-history"></i> ประวัติการทำรายการ
                           </Dropdown.Toggle>
                         </div>
-
                         <Dropdown.Menu>
                           <div className="d-grid gap-2">
                             <Link href="/history/stock" className="btn ml-5">
@@ -229,23 +225,23 @@ export const NavbarComponent = () => {
                     </Card>
                     <hr></hr>
                     <>
-                      <Link href="/" className="text-center btn-hakko2">
+                      <Link href="/" className="border-2 border-green-500 text-center btn-hakko2">
                         🏠<br></br>หน้าหลัก
                       </Link>
                       <br></br>
-                      <Link href="/shop" className="text-center btn-hakko2">
+                      <Link href="/shop" className="border-2 border-green-500 text-center btn-hakko2">
                         🛒<br></br>ร้านค้า
                       </Link>
                       <br></br>
-                      <Link href="/topup" className="text-center btn-hakko2">
+                      <Link href="/topup" className="border-2 border-green-500 text-center btn-hakko2">
                         💰<br></br>เติมเงิน
                       </Link>
                       <br></br>
-                      <Link href="" className="text-center btn-hakko2">
+                      <Link href="" className="border-2 border-green-500 text-center btn-hakko2">
                         ☎<br></br>ติดต่อ
                       </Link>
                       <br></br>
-                      <Link href="" className="text-center btn-hakko2">
+                      <Link href="" className="border-2 border-green-500 text-center btn-hakko2">
                         🤖<br></br>ดิสคอร์ด
                       </Link>
                     </>
