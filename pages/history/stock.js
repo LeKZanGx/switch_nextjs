@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { toast } from "react-toastify";
 
-function historyStock() {
-    const [history, setHistory] = useState(null);
+function HistoryStock() {
+    const [history, setHistory] = useState();
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
-    useEffect(function persistLoad(){
+    useEffect(() => {
         async function fetch() {
             const data = {
                 username: localStorage.getItem("username")
@@ -27,7 +27,7 @@ function historyStock() {
         }
         fetch()
     }, [])
-    if (history == null) {
+    if (history == "null") {
         return null;
     }
     function copy(text) {
@@ -96,4 +96,4 @@ function historyStock() {
     }
 }
 
-export default historyStock
+export default HistoryStock

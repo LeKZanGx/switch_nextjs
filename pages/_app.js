@@ -1,4 +1,5 @@
 import Head from "next/head";
+import '../styles/mdiicons.min.css'
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -29,6 +30,7 @@ export default function App({ Component, pageProps }) {
         <title>SwitchHub | Shop</title>
         <link rel="icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Security-Policy" content=""></meta>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@mdi/font@6.9.96/css/materialdesignicons.min.css"/>
       </Head>
       <NavbarComponent />
       <Component {...pageProps} />

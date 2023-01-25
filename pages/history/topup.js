@@ -2,13 +2,12 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { toast } from "react-toastify";
 
-function historyTopup() {
+function HistoryTopup() {
+    const [topuphistory, setTopupHistory] = useState();
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
-    const [topuphistory, setTopupHistory] = useState(null);
-    useEffect(function persistLoad() {
+    useEffect(() => {
         async function fetch() {
             const data = {
                 username: localStorage.getItem("username")
@@ -27,7 +26,7 @@ function historyTopup() {
         }
         fetch()
     }, [])
-    if (topuphistory == null) {
+    if (topuphistory == "null") {
         return null;
     }
     if (topuphistory.data != null) {
@@ -81,4 +80,4 @@ function historyTopup() {
     }
 }
 
-export default historyTopup
+export default HistoryTopup
