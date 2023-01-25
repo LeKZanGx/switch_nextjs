@@ -5,7 +5,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Badge, Card, Row } from "react-bootstrap";
+import { Badge, ButtonGroup, Card, Dropdown, DropdownButton, Row } from "react-bootstrap";
 import Image from "next/image";
 import { setCookie, deleteCookie } from "cookies-next";
 import { Button } from "react-bootstrap";
@@ -60,6 +60,7 @@ export const NavbarComponent = () => {
           setPoint(res.data.data.data.point)
           setRank(res.data.data.data.Stats)
           setCookie("token", localStorage.getItem("token"))
+          localStorage.setItem("username", res.data.data.data.username);
         }
       }).catch((err) => {
         if (err.status == 401) {
@@ -97,6 +98,7 @@ export const NavbarComponent = () => {
               </Navbar.Brand>
               <Navbar.Toggle
                 aria-controls={`offcanvasNavbar-expand-${expand}`}
+                className="bg-white text-dark"
               />
               <Navbar.Offcanvas
                 id={`offcanvasNavbar-expand-${expand}`}
@@ -170,6 +172,7 @@ export const NavbarComponent = () => {
               </Navbar.Brand>
               <Navbar.Toggle
                 aria-controls={`offcanvasNavbar-expand-${expand}`}
+                className="bg-white text-dark"
               />
               <Navbar.Offcanvas
                 id={`offcanvasNavbar-expand-${expand}`}
@@ -203,6 +206,27 @@ export const NavbarComponent = () => {
                       <h6>
                         🔴สถานะ: <Badge bg="success">{Rank}</Badge>
                       </h6>
+                      <Dropdown className="d-inline mx-2" autoClose="outside">
+                        <div className="d-grid gap-2">
+                          <Dropdown.Toggle id="dropdown-autoclose-outside" variant="success">
+                          <i className="mdi mdi-history"></i> ประวัติการทำรายการ
+                          </Dropdown.Toggle>
+                        </div>
+
+                        <Dropdown.Menu>
+                          <Dropdown.Item>
+                            <Link href="/history/stock">
+                              <i className="mdi mdi-store"></i> ประวัติการสั่งซื้อ
+                            </Link>
+                          </Dropdown.Item>
+                          <Dropdown.Item>
+                            <Link href="/history/topup">
+                              <i className="mdi mdi-currency-usd"></i> ประวัติการเติมเงิน
+                            </Link>
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                      <br></br>
                       <Button variant="outline-danger" onClick={handleLogout}><i className="mdi mdi-logout-variant"></i> ออกจากระบบ</Button>
                     </Card>
                     <hr></hr>

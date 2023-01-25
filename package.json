@@ -16,16 +16,21 @@
     "@mdi/font": "^7.1.96",
     "@next-auth/mongodb-adapter": "^1.1.1",
     "@next/font": "13.1.1",
+    "@react-icons/all-files": "^4.1.0",
     "animate.css": "^4.1.1",
+    "aos": "^2.3.4",
     "axios": "^1.2.2",
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.3",
+    "cdbreact": "^1.5.4",
     "cookies-next": "^2.1.1",
+    "datatables.net-bs5": "^1.13.1",
     "dotenv": "^16.0.3",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
     "jquery": "^3.6.3",
     "jsonwebtoken": "^9.0.0",
+    "mdb-react-ui-kit": "^5.1.0",
     "mongodb": "^4.13.0",
     "mongoose": "^6.8.3",
     "mysql": "^2.18.1",
@@ -37,12 +42,13 @@
     "react-dom": "18.2.0",
     "react-google-recaptcha": "^2.1.0",
     "react-icons": "^4.7.1",
+    "react-toastify": "^9.1.1",
     "sharp": "^0.31.3",
     "sweetalert2": "^11.6.16"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.20",
+    "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4"
   }
 }

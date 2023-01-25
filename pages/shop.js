@@ -1,12 +1,11 @@
 import axios from 'axios';
 import Image from 'next/image';
-import { useEffect } from 'react';
 import { Badge, Button, Card, Col, Row } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 function Shops(props) {
     console.log(props)
     const itemsWithCount = props.data.data.data.map((item) => {
-        console.log(item.Key)
         let strlist = [];
         strlist = item.Key
         let datalist = strlist.filter(function (el) { return el !== ""; });
@@ -14,8 +13,8 @@ function Shops(props) {
         let msg = "";
         let color = ""
         if (itemlist == 0) {
-            msg = 'สินค้าหมด!'
-            color = "outline-danger btn-block"
+            msg = 'ดูรายละเอียด'
+            color = "outline-info btn-block"
         } else {
             msg = 'สั่งซื้อสินค้า'
             color = "outline-success btn-block"
@@ -27,12 +26,102 @@ function Shops(props) {
             color,
         };
     });
+    function handleBuy(item) {
+        return Swal.fire({
+            icon: "info",
+            iconColor: "light-blue",
+            title: `${item.name}`,
+            html: `
+            <hr><p class="text-center">รายละเอียดสินค้า</p>
+            <div class="justify-content-start text-start ml-4">
+                ${item.description}
+            </div>
+            <hr>
+            <div class="md:col-span-12 col-span-12">
+                <p class="text-[16px] float-left ml-4 mt-2 font-light text-switch">
+                    ราคา: ${item.price} บาท
+                </p>
+            </div>
+            `,
+            confirmButtonText: `สั่งซื้อ ${item.name}`,
+            didClose: function () {
+
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const showLoading = await Swal.fire({
+                    icon: "info",
+                    title: "รอสักครู่...",
+                    timer: 1000,
+                    didOpen: function () {
+                        Swal.showLoading();
+                    }
+                })
+                if (showLoading) {
+                    if (item.itemlist < 1) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "แย่จัง",
+                            text: "สินค้าในคลังหมด!",
+                            timer: 2000,
+                            showConfirmButton: false
+                        })
+                        return
+                    }
+                }
+                const data = {
+                    name: item.name,
+                    username: localStorage.getItem("username")
+                }
+
+                const JSONdata = JSON.stringify(data)
+
+                const endpoint = 'https://golang-authapi.onrender.com/apiV1/item/buykey'
+
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSONdata,
+                }
+
+                const response = await fetch(endpoint, options)
+                const result = await response.json()
+
+                console.log(result)
+
+                if (result.status != 'success') {
+                    Swal.fire({
+                        icon: "error",
+                        title: "แย่จัง",
+                        text: result.message,
+                        timer: 2000,
+                        showConfirmButton: false
+                    })
+                    return
+                }else{
+                    return Swal.fire({
+                        icon: "success",
+                        title: "สั่งซื้อสำเร็จ!",
+                        text: result.message,
+                        timer: 2000,
+                        showConfirmButton: false,
+                        didClose: function () {
+                            window.location.href="/shop"
+                        }
+                    })
+                    return
+                }
+            }
+        })
+    }
     return (
         <div className='container'>
             <Row>
                 {itemsWithCount.map((item, index) => (
                     <Col md="4" key={index} className="mt-5">
-                        <Card bg='dark' key='dark' text='light' border='success'>
+                        <Card bg='dark' key='dark' text='light' border='success' data-aos="fade-down" data-aos-duration="1500">
                             <Card.Body>
                                 <Card.Title className='text-center'>{item.name}</Card.Title>
                                 <hr></hr>
@@ -57,7 +146,9 @@ function Shops(props) {
                                 </div>
                                 <Card.Footer>
                                     <div className="d-grid gap-2">
-                                        <Button variant={item.color}>{item.msg}</Button>
+                                        <Button variant={item.color} onClick={() => {
+                                            handleBuy(item)
+                                        }}>{item.msg}</Button>
                                     </div>
                                 </Card.Footer>
                             </Card.Body>
@@ -72,7 +163,6 @@ function Shops(props) {
 export async function getServerSideProps() {
     const res = await axios.get('https://golang-authapi.onrender.com/apiV1/items');
     const data = res.data;
-    console.log(data)
     return {
         props: {
             data,

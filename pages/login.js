@@ -95,7 +95,7 @@ export default function Login() {
             <div className='my-5 mx-auto'>
                 <Row className='justify-content-md-center'>
                     <Col md="4">
-                        <Card>
+                        <Card data-aos="fade-left" data-aos-duration="1000">
                             <Card.Body>
                                 <Card.Title className='text-center'>
                                     <h3>

@@ -113,7 +113,7 @@ export default function Register() {
             <div className='my-5 mx-auto'>
                 <Row className='justify-content-md-center'>
                     <Col md="4">
-                        <Card>
+                        <Card data-aos="fade-right" data-aos-duration="1000">
                             <Card.Body>
                                 <Card.Title className='text-center'>
                                     สร้างบัญชีผู้ใช้
