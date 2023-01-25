@@ -214,16 +214,14 @@ export const NavbarComponent = () => {
                         </div>
 
                         <Dropdown.Menu>
-                          <Dropdown.Item href="/history/topup">
-                            <Link href="/history/stock">
+                          <div className="d-grid gap-2">
+                            <Link href="/history/stock" className="btn ml-5">
                               <i className="mdi mdi-store"></i> ประวัติการสั่งซื้อ
                             </Link>
-                          </Dropdown.Item>
-                          <Dropdown.Item href="/history/topup">
-                            <Link href="/history/topup">
+                            <Link href="/history/topup" className="btn ml-5">
                               <i className="mdi mdi-currency-usd"></i> ประวัติการเติมเงิน
                             </Link>
-                          </Dropdown.Item>
+                          </div>
                         </Dropdown.Menu>
                       </Dropdown>
                       <br></br>
