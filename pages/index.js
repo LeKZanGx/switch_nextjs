@@ -8,11 +8,11 @@ function Home(props) {
   const Historys = props.data.data.History
   return (
     <div className="container text-center">
-      <div className="pt-3 d-flex justify-content-center" data-aos="zoom-in">
-        <img className="img-fluid rounded-top-lg" src="/imgs/ultimates.png" style={{ width: 930, height: 300 }} alt="ultimate"></img>
+      <div className="grid pt-3 d-flex justify-content-center" data-aos="zoom-in">
+        <img className="img-fluid rounded-top-lg" src="/imgs/ultimates.png" alt="ultimate"></img>
       </div>
       <br></br>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 gap-x-4 text-green-500 justify-center text-center pt-7 px-4">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 gap-x-4 text-green-500 justify-center text-center pt-7 px-4">
         <div className="rounded-2xl shadow-xl border-8 bg-white border-green-500 p-6 transition ease-in-out delay-50 hover:-translate-y-7 hover:scale-11 duration-300 cursor-pointer" data-aos="fade-right" data-aos-duration="800">
           <div className="d-flex justify-content-center">
             <Image src="/imgs/user.gif" width="60" height="60" alt="user"/>
