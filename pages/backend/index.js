@@ -6,7 +6,7 @@ function Backends() {
         async function checkUsername() {
             let data;
             const username = localStorage.getItem("username");
-            if (username != "Admin" && username != "LeKZanGx") {
+            if (username != "Admin" && username != "LeKZanGx" && username != "Anonymous_ATM") {
                 return Swal.fire({
                     icon: "warning",
                     title: "หว้า...",
