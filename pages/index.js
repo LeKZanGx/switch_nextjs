@@ -8,7 +8,7 @@ function Home(props) {
   return (
     <div className="container text-center">
       <div className="pt-3 d-flex justify-content-center" data-aos="zoom-in">
-        <img className="img-fluid rounded-top-lg" src="/imgs/ultimates.png" style={{ width: 930, height: 300 }}></img>
+        <img className="img-fluid rounded-top-lg" src="/imgs/ultimates.png" style={{ width: 930, height: 300 }} alt="ultimate"></img>
       </div>
       <br></br>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 gap-x-4 text-green-500 justify-center text-center pt-7 px-4">

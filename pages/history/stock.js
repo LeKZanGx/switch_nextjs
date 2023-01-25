@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 function historyStock() {
-    const [history, setHistory] = useState();
+    const [history, setHistory] = useState(null);
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
     useEffect(() => {
@@ -27,7 +27,7 @@ function historyStock() {
         }
         fetch()
     }, [])
-    if (history == undefined) {
+    if (history == null) {
         return null;
     }
     function copy(text) {

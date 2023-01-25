@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 function historyTopup() {
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
-    const [topuphistory, setTopupHistory] = useState();
+    const [topuphistory, setTopupHistory] = useState(null);
     useEffect(() => {
         async function fetch() {
             const data = {
@@ -27,7 +27,7 @@ function historyTopup() {
         }
         fetch()
     }, [])
-    if (topuphistory == undefined) {
+    if (topuphistory == null) {
         return null;
     }
     if (topuphistory.data != null) {
