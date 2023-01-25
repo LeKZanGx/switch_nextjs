@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 
 function HistoryTopup() {
-    const [topuphistory, setTopupHistory] = useState();
+    const [topuphistory, setTopupHistory] = useState(null);
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
     useEffect(() => {
@@ -26,7 +26,7 @@ function HistoryTopup() {
         }
         fetch()
     }, [])
-    if (topuphistory == "null") {
+    if (topuphistory == null) {
         return null;
     }
     if (topuphistory.data != null) {
