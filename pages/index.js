@@ -5,6 +5,7 @@ function Home(props) {
   const Users = props.data.data.Users
   const Items = props.data.data.Items
   const Topups = props.data.data.Topup
+  const Historys = props.data.data.History
   return (
     <div className="container text-center">
       <div className="pt-3 d-flex justify-content-center" data-aos="zoom-in">
@@ -30,8 +31,8 @@ function Home(props) {
           <div className="d-flex justify-content-center">
             <Image src="/imgs/dollar.gif" width="50" height="50" alt="dollar" />
           </div>
-          <h1 className="text-2xl">{Users} บาท</h1>
-          <h1 className="text-xl">ยอดการเติมเงินทั้งหมด</h1>
+          <h1 className="text-2xl">{Historys}</h1>
+          <h1 className="text-xl">ยอดการทำรายการทั้งหมด</h1>
         </div>
         <div className="rounded-2xl shadow-xl border-8 bg-white border-green-500 p-6 transition ease-in-out delay-50 hover:-translate-y-7 hover:scale-11 duration-300 cursor-pointer" data-aos="fade-left" data-aos-duration="800">
           <div className="d-flex justify-content-center">
