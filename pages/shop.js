@@ -37,17 +37,34 @@ function Shops(props) {
                 ${item.description}
             </div>
             <hr>
-            <div class="md:col-span-12 col-span-12">
-                <p class="text-[16px] float-left ml-4 mt-2 font-light text-switch">
+            <div class="justify-content-start text-start ml-4">
+                <p class="text-[16px] float-left font-light text-switch">
                     ราคา: ${item.price} บาท
                 </p>
             </div>
-            `,
+            <br>
+            <hr>
+            <div class="justify-content-conter text-center">
+                <p class="text-center">ใส่จำนวนที่ต้องการจะซื้อ</p>
+                <input type="number" min="1" max="${item.itemlist}" value="1" class="swal2-input" placeholder="0" id="amount">
+            </div>`,
             confirmButtonText: `สั่งซื้อ ${item.name}`,
             didClose: function () {
 
+            },
+            preConfirm: () => {
+                const amount = Swal.getPopup().querySelector('#amount').value
+                if (!amount) {
+                    Swal.showValidationMessage(`Please enter data`)
+                }
+
+                if (amount == 0) {
+                    Swal.showValidationMessage(`Please enter data`)
+                }
+                return { amount: amount}
             }
         }).then(async (result) => {
+            let amount = result.value?.amount
             if (result.isConfirmed) {
                 const showLoading = await Swal.fire({
                     icon: "info",
@@ -71,7 +88,8 @@ function Shops(props) {
                 }
                 const data = {
                     name: item.name,
-                    username: localStorage.getItem("username")
+                    username: localStorage.getItem("username"),
+                    amount: parseInt(amount)
                 }
 
                 const JSONdata = JSON.stringify(data)
@@ -111,7 +129,6 @@ function Shops(props) {
                             window.location.href="/shop"
                         }
                     })
-                    return
                 }
             }
         })

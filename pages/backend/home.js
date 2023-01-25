@@ -137,6 +137,8 @@ function BackendHome(props) {
                             <label for="key">คีย์ที่ต้องการเพิ่ม</label>
                         </div>`,
                 confirmButtonText: 'แก้ไข',
+                showDenyButton: true,
+                denyButtonText: `ลบคีย์ทั้งหมด`,
                 focusConfirm: false,
                 preConfirm: () => {
                     const name = result.data.data.name
@@ -151,6 +153,10 @@ function BackendHome(props) {
                         Swal.showValidationMessage(`Please enter data`)
                     }
                     return { name: name, newname: newname, price: price, description: description, category: category, image: image, keys: keyArray}
+                },
+                preDeny:() => {
+                    const name = result.data.data.name
+                    return { name: name}
                 }
             }).then((result) => {
                 if (result.isDismissed) {
@@ -158,7 +164,7 @@ function BackendHome(props) {
                 }
 
                 if (result.isDenied) {
-                    return null
+                    ConfirmDeleteKey(result.value)
                 }
 
                 if (result.isConfirmed) {
@@ -215,6 +221,43 @@ function BackendHome(props) {
                 if (result.isConfirmed) {
                     ConfirmUpdate(result.value)
                 }
+            })
+        }
+    }
+
+    const ConfirmDeleteKey = async function (data) {
+        console.log(data)
+        const JSONdata = JSON.stringify(data)
+
+        const endpoint = 'https://golang-authapi.onrender.com/apiV1/item/deletekey'
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSONdata,
+        }
+
+        const response = await fetch(endpoint, options)
+        const result = await response.json()
+        console.log(result)
+        if (result.status != "success") {
+            Swal.fire({
+                icon: "error",
+                title: "หว้าแย่จัง",
+                text: "เกิดข้อผิดพลาด",
+                showConfirmButton: false,
+                timer: 2000
+            })
+            return
+        } else {
+            Swal.fire({
+                icon: "success",
+                title: "สำเร็จ!",
+                text: result.message,
+                showConfirmButton: false,
+                timer: 2000
             })
         }
     }

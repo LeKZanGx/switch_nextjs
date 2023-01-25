@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-import { useRouter } from 'next/router'
 import { useEffect } from "react";
 function Backends() {
     useEffect(() => {
