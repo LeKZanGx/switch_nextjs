@@ -1,5 +1,4 @@
 import Head from "next/head";
-import '../styles/mdiicons.min.css'
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import 'bootstrap/dist/css/bootstrap.css';
