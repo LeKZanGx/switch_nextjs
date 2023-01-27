@@ -15,7 +15,7 @@ function HistoryTopup() {
             const JSONdata = JSON.stringify(data)
             const userdata = await axios({
                 method: "POST",
-                url: "https://golang-authapi.onrender.com/apiV1/history/topup",
+                url: "http://localhost:8080/apiV1/history/topup",
                 data: JSONdata,
                 headers: {
                     'Content-Type': "application/json"

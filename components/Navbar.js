@@ -49,7 +49,7 @@ export const NavbarComponent = () => {
       }
       axios({
         method: "GET",
-        url: "https://golang-authapi.onrender.com/apiV1/user/authentication",
+        url: "http://localhost:8080/apiV1/user/authentication",
         headers: {
           'Authorization': `Bearer ${localStorage.getItem("token")}`
         }

@@ -77,7 +77,7 @@ function Home(props) {
 }
 
 export async function getServerSideProps() {
-  const res = await axios.get('https://golang-authapi.onrender.com/apiV1/dataindex');
+  const res = await axios.get('http://localhost:8080/apiV1/dataindex');
   const data = res.data;
   return {
     props: {

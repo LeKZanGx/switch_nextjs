@@ -62,7 +62,7 @@ function BackendHome(props) {
     const ConfirmAddItem = async function (data) {
         const JSONdata = JSON.stringify(data)
 
-        const endpoint = 'https://golang-authapi.onrender.com/apiV1/item/additem'
+        const endpoint = 'http://localhost:8080/apiV1/item/additem'
 
         const options = {
             method: 'POST',
@@ -111,7 +111,7 @@ function BackendHome(props) {
 
         const JSONdata = JSON.stringify(data)
 
-        const endpoint = 'https://golang-authapi.onrender.com/apiV1/item/fetch'
+        const endpoint = 'http://localhost:8080/apiV1/item/fetch'
 
         const options = {
             method: 'POST',
@@ -180,7 +180,7 @@ function BackendHome(props) {
         }
         const JSONdata = JSON.stringify(data)
 
-        const endpoint = 'https://golang-authapi.onrender.com/apiV1/user/fetch'
+        const endpoint = 'http://localhost:8080/apiV1/user/fetch'
 
         const options = {
             method: 'POST',
@@ -249,7 +249,7 @@ function BackendHome(props) {
             }
 
             if (result.isConfirmed) {
-                axios.post('https://golang-authapi.onrender.com/apiV1/item/delete', {
+                axios.post('http://localhost:8080/apiV1/item/delete', {
                     name: name
                 }).then((res) => {
                     if (res.data.status != "success") {
@@ -279,7 +279,7 @@ function BackendHome(props) {
     const ConfirmDeleteKey = async function (data) {
         const JSONdata = JSON.stringify(data)
 
-        const endpoint = 'https://golang-authapi.onrender.com/apiV1/item/deletekey'
+        const endpoint = 'http://localhost:8080/apiV1/item/deletekey'
 
         const options = {
             method: 'POST',
@@ -314,7 +314,7 @@ function BackendHome(props) {
     const ConfirmUpdateItem = async function (data) {
         const JSONdata = JSON.stringify(data)
 
-        const endpoint = 'https://golang-authapi.onrender.com/apiV1/item/edit'
+        const endpoint = 'http://localhost:8080/apiV1/item/edit'
 
         const options = {
             method: 'POST',
@@ -349,7 +349,7 @@ function BackendHome(props) {
     const ConfirmUpdate = async function (data) {
         const JSONdata = JSON.stringify(data)
 
-        const endpoint = 'https://golang-authapi.onrender.com/apiV1/user/edit'
+        const endpoint = 'http://localhost:8080/apiV1/user/edit'
 
         const options = {
             method: 'POST',

@@ -16,7 +16,7 @@ function HistoryStock() {
             const JSONdata = JSON.stringify(data)
             const userdata = await axios({
                 method: "POST",
-                url: "https://golang-authapi.onrender.com/apiV1/history/stock",
+                url: "http://localhost:8080/apiV1/history/stock",
                 data: JSONdata,
                 headers: {
                     'Content-Type': "application/json"

@@ -15,7 +15,7 @@ function Topup() {
 
         const JSONdata = JSON.stringify(data)
 
-        const endpoint = 'https://golang-authapi.onrender.com/apiV1/topup'
+        const endpoint = 'http://localhost:8080/apiV1/topup'
 
         const options = {
             method: 'POST',
