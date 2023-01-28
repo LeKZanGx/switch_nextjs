@@ -89,7 +89,7 @@ export const NavbarComponent = () => {
             <Container fluid>
               <Navbar.Brand href="/home">
                 <Image
-                  src="https://cdn.discordapp.com/icons/961866856283635732/1aa2c24f001a61d7def13c9aa460b18c.webp?size=512"
+                  src=""
                   width="80"
                   height="80"
                   className="d-inline-block align-top"
@@ -163,7 +163,7 @@ export const NavbarComponent = () => {
             <Container fluid>
               <Navbar.Brand href="/home">
                 <Image
-                  src="https://cdn.discordapp.com/attachments/1057020152106987590/1059787581849616474/Logo-switch-hub-gggggggggggggggggggggg.png"
+                  src=""
                   width="60"
                   height="60"
                   className="d-inline-block align-top"

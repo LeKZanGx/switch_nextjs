@@ -9,7 +9,7 @@ function Home(props) {
   return (
     <div className="container text-center">
       <div className="grid pt-3 d-flex justify-content-center" data-aos="zoom-in">
-        <img className="img-fluid rounded-top-lg" src="/imgs/ultimates.png" alt="ultimate"></img>
+        <img className="img-fluid rounded-top-lg" src="" alt="ultimate kak"></img>
       </div>
       <br></br>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 gap-x-4 text-green-500 justify-center text-center pt-7 px-4">
